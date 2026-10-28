@@ -1,8 +1,9 @@
-body {
+.mainContent {
     font-family: Arial, Helvetica, sans-serif;
-    background: var(--background);
-    color: var(--text);
-    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 .card {
@@ -15,7 +16,7 @@ body {
     box-shadow: 0 4px 10px #ccc;
 }
 
-.box {
+.container {
     background-color: #fafafa;
     padding: 15px;
     margin-top: 20px;
@@ -24,329 +25,163 @@ body {
     box-shadow: 0 2px 5px #22212173;
 }
 
+/* properties of calendar */
 
-h1 {
-    font-size: 42px;
+
+
+
+
+
+
+/*properties of taskmanager */
+
+.emptyList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-h2 {
-    font-size: 17px;
+.checkmark {
+    font-size: 40px;
 }
 
-.task-panel,
-.task-list-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 26px;
-    margin-bottom: 22px;
-    box-shadow: 0 5px 20px rgba(40, 40, 80, 0.03);
+.taskList {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-top: 1px solid rgb(192, 190, 190);
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    
 }
 
-.addForm {
+input[type="checkbox"] {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.taskName {
+    width: 500px;
+}
+
+.deleteButton {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: #dc2626;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteButton:hover {
+    background-color: #b91c1c;
+}
+
+.deleteButton:active {
+    background-color: #dc2626;
+    color: black;
+}
+
+.addTaskForm {
     display: flex;
     gap: 10px;
 }
 
-.addInput{
-    flex: 1;    
+.addInput{   
     padding: 14px 15px;
     border-radius: 10px;
     border: 0px;
-    width: 550px;
+    width: 380px;
     font-size: 20px;
     outline: none;
+    box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.158);
 }
 
-.addInput {
-    box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.158);;
-}
-
-.addButton {
-    flex: 1;
+.buttonAdd {
     background: black;
     color: white;
     border: none;
     border-radius: 10px;
     padding: 14px 15px;
+    height: 50px;
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    margin-left: 20px;
 }
 
-.addButton:hover {
+.buttonAdd:hover {
     background: white;
     color: black;
     border-color: black;
 }
 
-.addButton:active {
+.buttonAdd:active {
     background: black;
     color: white;
 }
 
-
-
-
-
-.task-list-section h2 {
-    margin-bottom: 0;
-}
-
-.task-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 22px;
-}
-
-.task-item {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 14px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--surface);
-    transition: background 0.2s, border-color 0.2s,
-                transform 0.2s, opacity 0.2s;
-    animation: slide-in 0.3s ease;
-}
-
-.task-item:hover {
-    background: #fafaff;
-    border-color: #d9d7f8;
-}
-
-.task-title {
-    flex: 1;
-    min-width: 0;
-    font-size: 14px;
-    overflow-wrap: anywhere;
-    transition: color 0.2s;
-}
-
-.toggle-form,
-.delete-form {
-    display: flex;
-    align-items: center;
-}
-
-.complete-button {
-    width: 23px;
-    height: 23px;
-    border: 2px solid #d8d9e6;
-    border-radius: 7px;
-    background: white;
+.buttonExtend {
+    background: black;
     color: white;
-    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 15px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    flex-shrink: 0;
-    transition: background 0.2s, border-color 0.2s,
-                transform 0.2s;
+    margin-top: 10px;
 }
 
-.complete-button:hover {
-    border-color: var(--success);
-    transform: scale(1.08);
+.buttonExtend:hover {
+
 }
 
-.completed .complete-button {
-    background: var(--success);
-    border-color: var(--success);
+.buttonExtend:active {
+
 }
 
-.completed .task-title {
-    color: var(--text-muted);
-    text-decoration: line-through;
+
+/* properties of stickynotes */
+
+.noteAddContainer {
+    margin-top: 20px;   
 }
 
-.delete-button {
+.addNoteForm {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 8px;
+    gap: 10px;
+}
+
+.sticky-note {
+    width: 220px;
+    height: 220px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #fff59d;
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.sticky-note textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+
     background: transparent;
-    color: #a4a5b6;
-    font-size: 23px;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
+    border: none;
+    outline: none;
+    resize: none;
 
-.delete-button:hover {
-    background: #fff0f1;
-    color: var(--danger);
-}
-
-/* =========================
-   7. Leere Aufgabenliste
-   ========================= */
-
-.checkmark {    
-    align-items: center;
-    justify-content: center;
-}
-
-
-.empty-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 54px;
-    height: 54px;
-    margin: 0 auto 17px;
-    border-radius: 50%;
-    background: rgba(128, 128, 128, 0.158);
-    color: black;
-    font-size: 25px;
-}
-
-.empty-state h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
-}
-
-.empty-state p {
-    color: var(--text-muted);
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-/* =========================
-   8. Fußzeile
-   ========================= */
-
-.app-footer {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 12px;
-    padding: 10px 0;
-}
-
-/* Versteckt Labels nur optisch, nicht für Screenreader */
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* =========================
-   9. Animationen
-   ========================= */
-
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slide-in {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* =========================
-   10. Mobile Darstellung
-   ========================= */
-
-@media (max-width: 520px) {
-    body {
-        padding: 25px 12px;
-    }
-
-    .app-header {
-        align-items: flex-start;
-        margin-bottom: 25px;
-    }
-
-    h1 {
-        font-size: 34px;
-    }
-
-    .task-counter {
-        width: 65px;
-        height: 65px;
-        border-radius: 16px;
-    }
-
-    .task-panel,
-    .task-list-section {
-        padding: 19px 15px;
-    }
-
-    .add-form {
-        flex-direction: column;
-    }
-
-    .add-form input {
-        width: 100%;
-        padding: 13px;
-    }
-
-    .add-button {
-        padding: 13px;
-    }
-
-    .task-item {
-        gap: 10px;
-        padding: 12px 10px;
-    }
-}
-
-/* Animationen bei entsprechender Systemeinstellung reduzieren */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-
-/* Aufgabe wird gelöscht */
-.task-item.removing {
-    opacity: 0;
-    transform: translateX(25px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-/* Aufgabe wird aktualisiert */
-.task-item.updating {
-    opacity: 0.65;
-    transform: scale(0.98);
-}
-
-/* Rückmeldung wird ausgeblendet */
-.feedback.fade-out {
-    opacity: 0;
-    transform: translateY(-5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
 }
 

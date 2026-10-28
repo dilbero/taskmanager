@@ -20,18 +20,30 @@ try {
     // Ergebnisse als assoziative Arrays zurückgeben
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-    // Tabelle erstellen, falls sie noch nicht existiert
-    $sql = "
+    // Tabelle für Aufgaben erstellen
+    $sqlTasks = "
         CREATE TABLE IF NOT EXISTS tasks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
-            is_done INTEGER NOT NULL DEFAULT 0
+            completed INTEGER NOT NULL DEFAULT 0
         )
     ";
 
-    $pdo->exec($sql);
+    $pdo->exec($sqlTasks);
+
+    // Tabelle für unabhängige Notizen erstellen
+    $sqlNotes = "
+        CREATE TABLE IF NOT EXISTS notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content TEXT NOT NULL,
+            created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+    ";
+
+    $pdo->exec($sqlNotes);
 
 } catch (PDOException $e) {
+
     // Keine technischen Details an Besucher ausgeben
     error_log('Datenbankfehler: ' . $e->getMessage());
 
