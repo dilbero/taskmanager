@@ -1,23 +1,59 @@
+body {
+    min-height: 97vh;
+    background:
+            radial-gradient(
+                circle at 15% 20%,
+                rgba(99, 102, 241, 0.10),
+                transparent 35%
+            ),
+            radial-gradient(
+                circle at 85% 80%,
+                rgba(56, 189, 248, 0.10),
+                transparent 35%
+            ),
+            linear-gradient(
+                135deg,
+                #f8fafc,
+                #eef2f7
+            );
+}
+
 .mainContent {
+    background: transparent;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 20px;
+    gap: 10px;
 }
 
 .card {
-    background-color: rgba(216, 196, 196, 0.479);
-    width: 800px;
-    margin: 100px auto;
+    background-color: #c2cfdd;
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+
     padding: 25px;
-    border: 1px solid #ddd;
     border-radius: 15px;
-    box-shadow: 0 4px 10px #ccc;
+}
+
+.calenderCard {
+    width: 400px;
+    box-sizing: border-box;
+}
+
+.taskCard {
+    width: 600px;
+    box-sizing: border-box;
+}
+
+.stickyNotesCard {
+    width: 544px;
+    box-sizing: border-box;
 }
 
 .container {
-    background-color: #fafafa;
+    background: #ffffff;
     padding: 15px;
     margin-top: 20px;
     border: 1px solid #ddd;
@@ -52,7 +88,11 @@
     border-top: 1px solid rgb(192, 190, 190);
     padding: 10px;
     margin-bottom: 5px;
-    font-size: 20px;
+    font-size: 18px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    line-height: 1.5;
+    color: #333;
     
 }
 
@@ -70,9 +110,10 @@ input[type="checkbox"] {
     height: 30px;
     border-radius: 50%;
     border: none;
-    background-color: #dc2626;
+    background-color: #dc2626a2;
     color: white;
     font-size: 18px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -80,11 +121,11 @@ input[type="checkbox"] {
 }
 
 .deleteButton:hover {
-    background-color: #b91c1c;
+    background-color: #cd1a1a;
 }
 
 .deleteButton:active {
-    background-color: #dc2626;
+    background-color: #dc2626a2;
     color: black;
 }
 
@@ -98,7 +139,7 @@ input[type="checkbox"] {
     border-radius: 10px;
     border: 0px;
     width: 380px;
-    font-size: 20px;
+    font-size: 16px;
     outline: none;
     box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.158);
 }
@@ -110,7 +151,7 @@ input[type="checkbox"] {
     border-radius: 10px;
     padding: 14px 15px;
     height: 50px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -132,7 +173,7 @@ input[type="checkbox"] {
     border: none;
     border-radius: 10px;
     padding: 14px 15px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
@@ -160,7 +201,7 @@ input[type="checkbox"] {
 
 .sticky-note {
     width: 220px;
-    height: 220px;
+    height: 150px;
     padding: 15px;
     box-sizing: border-box;
     background-color: #fff59d;
@@ -172,16 +213,39 @@ input[type="checkbox"] {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-
     background: transparent;
     border: none;
     outline: none;
     resize: none;
-
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: bold;
     font-size: 15px;
     line-height: 1.5;
     color: #333;
+}
+
+.sticky-note button {
+    background: transparent;
+    border: none;
+    outline: none;
+    text-align: left;
+    width: 190px;
+    height: 120px;
+    resize: none;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.sticky-note button:hover {
+    filter: blur(1px);
+}
+
+.noteList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 

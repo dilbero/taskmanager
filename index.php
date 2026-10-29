@@ -21,16 +21,20 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <main class="mainContent">
-        <section class="card">
-            <h1>TimeTable</h1>
+        <section class="card calenderCard">
+            <h1>
+                <span id="labelWeekday"></span> 
+                <span id="labelToday"></span>
+            </h1>
             <div class="container">
                 <h2><u>Deine Termine</u></h2>
             </div>
-            <div class="container">
-                <h2>Neuen Termin erstellen</h2>
+            <button class="buttonExtend" onclick="newCalenderItem()">Neuer Termin</button>
+            <div id="containerNewCalenderItem" class="container">
+                <h3>Neuen Termin erstellen</h3>
             </div>
         </section>
-        <section class="card">
+        <section class="card taskCard">
             <h1>TaskManager</h1>
             <div class="container">
                 <h2><u>Deine Aufgaben</u></h2> 
@@ -55,7 +59,7 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     echo "</div>";
                     echo "<form method='POST' action='deleteTask.php'>";
                     echo "<input type='hidden' name='id' value='" . (int)$task['id'] . "'>";
-                    echo "<button type='submit' class='deleteButton' onclick='return confirm(\"Möchtest du diesen Task wirklich löschen?\")'>X</button>";
+                    echo "<button type='submit' class='deleteButton' onclick='return confirm(\"Möchtest du diese Aufgabe wirklich löschen?\")'>X</button>";
                     echo "</form>";
                     echo "</div>";
 }
@@ -64,46 +68,41 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <button class="buttonExtend" onclick="newTask()">Neue Aufgabe</button>
             <div id="containerNewTask" class="container">
-                <h2>Neue Aufgabe</h2>
+                <h3>Neue Aufgabe</h3>
                 <form method="POST" action="addTask.php" id="addForm" class="addTaskForm">
-                    <input type="text" id="title" name="taskTitle" class="addInput" placeholder="Was möchtest du erledigen?" maxlength="150" required>
-                    <button type="submit" class="buttonAdd">
-                        + Hinzufügen
-                    </button>
+                    <input type="text" id="taskTitle" name="taskTitle" class="addInput" placeholder="Was möchtest du erledigen?" maxlength="150" required>
+                    <button type="submit" class="buttonAdd">+</button>
                 </form>
             </div>            
         </section>
-        <section class="card">
+        <section class="card stickyNotesCard">
             <h1>StickyNotes</h1>
             <div class="container">
-                <h2>Deine Notizen</h2>
                 <?php
                     if (empty($notes)) {
                         echo "<div class='emptyList'>
                               <h3>Du hast noch keine Notizen!</h3>
                               </div>";
-                    } else {
-                        foreach ($notes as $note) {
-                    echo "<div class='taskList'>";
+                    } 
                     
-                    
-                    
-                    
-                    echo "<form method='POST' action='deleteNote.php'>";
-                    echo "<input type='hidden' name='id' value='" . (int)$note['id'] . "'>";
-                    echo "<button type='submit' class='deleteButton' onclick='return confirm(\"Möchtest du diesen Task wirklich löschen?\")'>";
-                    echo "<div class='sticky-note'>";
-                    echo "<span>".($note['content'])."</span>";
-                    echo "</div>";
-                    echo "</button>";
-                    echo "</form>";
-                    
-                    echo "</div>";
-}
+                    else {
+                        echo "<div class='noteList'>";
+                        foreach ($notes as $note) {     
+                            echo "<div class='sticky-note'>";  
+                                         
+                            echo "<form method='POST' action='deleteNote.php'>";
+                            echo "<input type='hidden' name='id' value='" . (int)$note['id'] . "'>";
+                            echo "<button type='submit' onclick='return confirm(\"Möchtest du diese Notiz wirklich löschen?\")'>";
+                            echo "<span>".($note['content'])."</span>";                            
+                            echo "</button>";
+                            echo "</form>";     
+                            echo "</div>";              
+                        }
+                        echo "</div>";
                     }
                 ?>
             </div>
-            <button class="buttonExtend" onclick="newNote()">Neue Notiz</button>
+            <button class="buttonExtend" onclick="newNote()">Neue Notiz ▼</button>
             <div id="containerNewNote" class="noteAddContainer">
                 <hr>
                 <form method="POST" action="addNote.php" id="addNoteForm" class="addNoteForm">
