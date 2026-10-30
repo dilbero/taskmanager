@@ -23,15 +23,39 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <main class="mainContent">
         <section class="card calenderCard">
             <h1>
-                <span id="labelWeekday"></span> 
+                <span id="labelWeekday" class="labelWeekday"></span> 
                 <span id="labelToday"></span>
             </h1>
             <div class="container">
                 <h2><u>Deine Termine</u></h2>
+                <?php
+                echo "<div class='emptyList'>
+                              <div class='checkmark'>📅</div>
+                              <h3>Du hast keine Termine heute!</h3>
+                              </div>";
+                ?>
             </div>
-            <button class="buttonExtend" onclick="newCalenderItem()">Neuer Termin</button>
+            <button class="buttonExtend" onclick="newCalenderItem()">Neuer Termin <div id="dateArrow" class="arrow">▼</div></button>
             <div id="containerNewCalenderItem" class="container">
                 <h3>Neuen Termin erstellen</h3>
+                <form method="POST" action="addDate.php" id="addDateForm" class="addDateForm">
+                    <div class="time-picker">
+                        <button type="button" id="timeButton">
+                            <span id="selectedTime">14:30</span>
+                            <span>▼</span>
+                        </button>
+
+                        <div id="timeMenu" class="time-menu">
+                            <div class="time-columns">
+                                <div id="hours" class="time-column"></div>
+                                <div id="minutes" class="time-column"></div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="time" id="timeInput" value="14:30">
+                    </div>
+                    <button type="submit" class="buttonAdd">+</button>
+                </form>
             </div>
         </section>
         <section class="card taskCard">
@@ -55,7 +79,8 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         . " onchange='this.form.submit()'>";
                     echo "</form>";
                     echo "<div class='taskName'>";
-                    echo "<span>".($task['title'])."</span>";
+                    echo "<span>";
+                    echo ($task['completed'] ? '<s>' : '') . ($task['title']) . ($task['completed'] ? '</s>' : '') . "</span>";
                     echo "</div>";
                     echo "<form method='POST' action='deleteTask.php'>";
                     echo "<input type='hidden' name='id' value='" . (int)$task['id'] . "'>";
@@ -66,7 +91,7 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     }
                 ?>
             </div>
-            <button class="buttonExtend" onclick="newTask()">Neue Aufgabe</button>
+            <button class="buttonExtend" onclick="newTask()">Neue Aufgabe <div id="taskArrow" class="arrow">▼</div></button>
             <div id="containerNewTask" class="container">
                 <h3>Neue Aufgabe</h3>
                 <form method="POST" action="addTask.php" id="addForm" class="addTaskForm">
@@ -102,7 +127,7 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     }
                 ?>
             </div>
-            <button class="buttonExtend" onclick="newNote()">Neue Notiz ▼</button>
+            <button class="buttonExtend" onclick="newNote()">Neue Notiz <div id="noteArrow" class="arrow">▼</div></button>
             <div id="containerNewNote" class="noteAddContainer">
                 <hr>
                 <form method="POST" action="addNote.php" id="addNoteForm" class="addNoteForm">

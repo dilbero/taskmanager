@@ -62,9 +62,37 @@ body {
 }
 
 /* properties of calendar */
+.labelWeekday {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgba(136, 136, 221, 0.404);
+}
 
+input[type="time"] {
+    appearance: none;
+    -webkit-appearance: none;
 
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
 
+    background-color: #ffffff;
+    color: #1e293b;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+input[type="time"]:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
 
 
 
@@ -202,7 +230,7 @@ input[type="checkbox"] {
 .sticky-note {
     width: 220px;
     height: 150px;
-    padding: 15px;
+    padding: 5px;
     box-sizing: border-box;
     background-color: #fff59d;
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
@@ -219,7 +247,7 @@ input[type="checkbox"] {
     resize: none;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.5;
     color: #333;
 }
@@ -234,7 +262,7 @@ input[type="checkbox"] {
     resize: none;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.5;
     color: #333;
 }
@@ -246,6 +274,81 @@ input[type="checkbox"] {
 .noteList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 20px; 
 }
 
+.arrow {
+    display: inline-block;
+    transform: rotate(-90deg);
+    transition: transform 0.3s ease;
+}
+
+.arrow.open {
+    transform: rotate(0deg);
+}
+
+.time-picker {
+    position: relative;
+    width: 160px;
+}
+
+#timeButton {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.time-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 10;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px #0002;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: 0.2s ease;
+}
+
+.time-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.time-columns {
+    display: flex;
+    gap: 8px;
+}
+
+.time-column {
+    width: 55px;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.time-option {
+    padding: 8px;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.time-option:hover {
+    background: #e0e7ff;
+}
+
+.time-option.selected {
+    background: #4f46e5;
+    color: white;
+}

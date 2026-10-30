@@ -3,7 +3,7 @@
 
 // Speicherort der Datenbank
 $dbDirectory = __DIR__ . '/database';
-$dbFile = $dbDirectory . '/tasks.db';
+$dbFile = $dbDirectory . '/officedashboard.db';
 
 // Datenbankordner erstellen, falls er fehlt
 if (!is_dir($dbDirectory)) {
