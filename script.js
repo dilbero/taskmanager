@@ -68,51 +68,19 @@ function getTodaysDate() {
     }).replace(",", "");
 }
 
-function createOptions(container, count, step, type) {
-    for (let i = 0; i < count; i += step) {
-        const value = String(i).padStart(2, "0");
-        const option = document.createElement("div");
+function timeChanged() {
+    const pickerStart = document.getElementById("startTime"); 
+    const pickerEnd = document.getElementById("endTime");
 
-        option.className = "time-option";
-        option.textContent = value;
+    pickerEnd.disabled = false;
 
-        if ((type === "hour" ? hour : minute) === value) {
-            option.classList.add("selected");
-        }
+      if (!pickerStart.value) return;
 
-        option.addEventListener("click", () => {
-            if (type === "hour") {
-                hour = value;
-            } else {
-                minute = value;
-            }
+    const [hours, minutes] = pickerStart.value.split(":").map(Number);
 
-            updateTime();
-        });
+    const nextHour = (hours + 1) % 24;
 
-        container.appendChild(option);
-    }
+    pickerEnd.value =
+        String(nextHour).padStart(2, "0") + ":" +
+        String(minutes).padStart(2, "0");
 }
-
-function updateTime() {
-    selectedTime.textContent = `${hour}:${minute}`;
-    timeInput.value = `${hour}:${minute}`;
-
-    hours.innerHTML = "";
-    minutes.innerHTML = "";
-
-    createOptions(hours, 24, 1, "hour");
-    createOptions(minutes, 60, 5, "minute");
-}
-
-timeButton.addEventListener("click", () => {
-    timeMenu.classList.toggle("open");
-});
-
-document.addEventListener("click", (event) => {
-    if (!event.target.closest(".time-picker")) {
-        timeMenu.classList.remove("open");
-    }
-});
-
-updateTime();

@@ -1,35 +1,25 @@
 body {
-    min-height: 97vh;
-    background:
-            radial-gradient(
-                circle at 15% 20%,
-                rgba(99, 102, 241, 0.10),
-                transparent 35%
-            ),
-            radial-gradient(
-                circle at 85% 80%,
-                rgba(56, 189, 248, 0.10),
-                transparent 35%
-            ),
-            linear-gradient(
-                135deg,
-                #f8fafc,
-                #eef2f7
-            );
+    background-color: #F7F6F2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
 }
 
-.mainContent {
+main {
     background: transparent;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 10px;
+    flex: 1 0 auto;
+    margin-top:10px;
 }
 
 .card {
-    background-color: #c2cfdd;
-    border: 1px solid #e2e8f0;
+    background-color: #DCDDD5;
+    border: 1px solid #D2D5C9;
 
     box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
 
@@ -56,7 +46,7 @@ body {
     background: #ffffff;
     padding: 15px;
     margin-top: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #E5E4DC;
     border-radius: 10px;
     box-shadow: 0 2px 5px #22212173;
 }
@@ -65,7 +55,8 @@ body {
 .labelWeekday {
     padding: 10px;
     border-radius: 15px;
-    background-color: rgba(136, 136, 221, 0.404);
+    background-color: #829681;
+    color: white;
 }
 
 input[type="time"] {
@@ -73,7 +64,7 @@ input[type="time"] {
     -webkit-appearance: none;
 
     padding: 12px 15px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #D1D5C8;
     border-radius: 10px;
 
     background-color: #ffffff;
@@ -173,7 +164,8 @@ input[type="checkbox"] {
 }
 
 .buttonAdd {
-    background: black;
+    background-color: #40583B;
+    border: 1px solid #40583B;
     color: white;
     border: none;
     border-radius: 10px;
@@ -186,17 +178,18 @@ input[type="checkbox"] {
 
 .buttonAdd:hover {
     background: white;
-    color: black;
-    border-color: black;
+    color: #40583B;;
+    border: 1px solid #40583B;
 }
 
 .buttonAdd:active {
-    background: black;
+    background-color: #40583B;
     color: white;
 }
 
 .buttonExtend {
-    background: black;
+    background-color: #40583B;
+    border: 1px solid #40583B;
     color: white;
     border: none;
     border-radius: 10px;
@@ -212,7 +205,7 @@ input[type="checkbox"] {
 }
 
 .buttonExtend:active {
-
+    background-color: #40583B;
 }
 
 
@@ -287,68 +280,9 @@ input[type="checkbox"] {
     transform: rotate(0deg);
 }
 
-.time-picker {
-    position: relative;
-    width: 160px;
-}
-
-#timeButton {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.time-menu {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    z-index: 10;
-    background: white;
+footer {
+    margin-top: 10px;
     padding: 10px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px #0002;
-
-    opacity: 0;
-    transform: translateY(-8px);
-    pointer-events: none;
-    transition: 0.2s ease;
-}
-
-.time-menu.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.time-columns {
-    display: flex;
-    gap: 8px;
-}
-
-.time-column {
-    width: 55px;
-    max-height: 180px;
-    overflow-y: auto;
-}
-
-.time-option {
-    padding: 8px;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.time-option:hover {
-    background: #e0e7ff;
-}
-
-.time-option.selected {
-    background: #4f46e5;
-    color: white;
 }

@@ -1,10 +1,15 @@
 <?php
 require_once 'db.php';
-$sql_query = "SELECT * FROM tasks";
-$stmt = $pdo->query($sql_query);
+$queryCalendar = "SELECT * FROM calendar";
+$stmt = $pdo->query($queryCalendar);
+$dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$queryTasks = "SELECT * FROM tasks";
+$stmt = $pdo->query($queryTasks);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$sql_query = "SELECT * FROM notes";
-$stmt = $pdo->query($sql_query);
+
+$queryNotes = "SELECT * FROM notes";
+$stmt = $pdo->query($queryNotes);
 $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -20,7 +25,7 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="script.js" defer></script>
 </head>
 <body>
-    <main class="mainContent">
+    <main>
         <section class="card calenderCard">
             <h1>
                 <span id="labelWeekday" class="labelWeekday"></span> 
@@ -29,31 +34,27 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="container">
                 <h2><u>Deine Termine</u></h2>
                 <?php
-                echo "<div class='emptyList'>
+                if (empty($dates)) {
+                    echo "<div class='emptyList'>
                               <div class='checkmark'>📅</div>
                               <h3>Du hast keine Termine heute!</h3>
                               </div>";
+                } else {
+                    foreach($dates as $date) {
+                        echo $date['title']; 
+                    }
+                }
+                
                 ?>
             </div>
             <button class="buttonExtend" onclick="newCalenderItem()">Neuer Termin <div id="dateArrow" class="arrow">▼</div></button>
             <div id="containerNewCalenderItem" class="container">
                 <h3>Neuen Termin erstellen</h3>
                 <form method="POST" action="addDate.php" id="addDateForm" class="addDateForm">
-                    <div class="time-picker">
-                        <button type="button" id="timeButton">
-                            <span id="selectedTime">14:30</span>
-                            <span>▼</span>
-                        </button>
-
-                        <div id="timeMenu" class="time-menu">
-                            <div class="time-columns">
-                                <div id="hours" class="time-column"></div>
-                                <div id="minutes" class="time-column"></div>
-                            </div>
-                        </div>
-
-                        <input type="hidden" name="time" id="timeInput" value="14:30">
-                    </div>
+                    <input type="date" id="eventDate" name="eventDate" required>
+                    <input type="time" id="startTime" name="startTime" onfocus="this.showPicker()" onchange="timeChanged()" required>
+                    <input type="time" id="endTime" name="endTime" disabled required>
+                    <input type="text" id="dateName" name="dateName" class="addInput" style="width:50px" required>
                     <button type="submit" class="buttonAdd">+</button>
                 </form>
             </div>
@@ -69,9 +70,9 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                               <h3>Alles erledigt, du hast keine Aufgaben!</h3>
                               </div>";
                     } else {
+                       
                         foreach ($tasks as $task) {
-                    echo "<div class='taskList'>";
-                    
+                    echo "<div class='taskList'>";                    
                     echo "<form method='POST' action='changeTaskState.php'>";
                     echo "<input type='hidden' name='id' value='" . (int)$task['id'] . "'>";
                     echo "<input type='checkbox' name='completed' value='1' "
@@ -138,6 +139,9 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </form>
             </div>            
         </section>
-    </main>          
+    </main>       
+    <footer>
+        <span>©2026 Kai Dilberowic
+    </footer>   
 </body>
 </html>
