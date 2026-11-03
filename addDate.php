@@ -15,12 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $endTime !== ''
     ) {
 
-        $sql = "
+        $query = "
             INSERT INTO calendar (title, event_date, start_time, end_time)
             VALUES (:title, :eventDate, :start_time, :end_time)
         ";
 
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare($query);
 
         $stmt->execute([
             'title' => $title,

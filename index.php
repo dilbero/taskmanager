@@ -1,6 +1,6 @@
 <?php
 require_once 'db.php';
-$queryCalendar = "SELECT * FROM calendar";
+$queryCalendar = $sql = "SELECT * FROM calendar WHERE event_date = date('now', 'localtime')";
 $stmt = $pdo->query($queryCalendar);
 $dates = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -41,7 +41,19 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                               </div>";
                 } else {
                     foreach($dates as $date) {
-                        echo $date['title']; 
+                        echo "<form method='POST' class='dateList' action='deleteDate.php'>";
+                        echo "<input type='hidden' name='id' value='" . (int)$date['id'] . "'>";
+                        echo "<span>";
+                        echo $date['start_time'];
+                        echo " - ";
+                        echo $date['end_time'];
+                        echo "</span>";
+                        echo ": ";
+                        echo "<span class='dateName'>";
+                        echo $date['title'];
+                        echo "</span>"; 
+                        echo "<button type='submit' class='deleteButton' onclick='return confirm(\"Möchtest du diesen Termin wirklich löschen?\")'>X</button>";
+                        echo "</form>";                        
                     }
                 }
                 
@@ -51,10 +63,10 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div id="containerNewCalenderItem" class="container">
                 <h3>Neuen Termin erstellen</h3>
                 <form method="POST" action="addDate.php" id="addDateForm" class="addDateForm">
-                    <input type="date" id="eventDate" name="eventDate" required>
+                    <input type="date" id="eventDate" name="eventDate" value="<?= date('Y-m-d') ?>" required>
                     <input type="time" id="startTime" name="startTime" onfocus="this.showPicker()" onchange="timeChanged()" required>
                     <input type="time" id="endTime" name="endTime" disabled required>
-                    <input type="text" id="dateName" name="dateName" class="addInput" style="width:50px" required>
+                    <input type="text" id="dateName" name="dateName" placeholder="Welchen Termin hast du?" required>
                     <button type="submit" class="buttonAdd">+</button>
                 </form>
             </div>
@@ -81,7 +93,8 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     echo "</form>";
                     echo "<div class='taskName'>";
                     echo "<span>";
-                    echo ($task['completed'] ? '<s>' : '') . ($task['title']) . ($task['completed'] ? '</s>' : '') . "</span>";
+                    echo ($task['completed'] ? '<s>' : '') . ($task['title']) . ($task['completed'] ? '</s>' : '');
+                    echo "</span>";
                     echo "</div>";
                     echo "<form method='POST' action='deleteTask.php'>";
                     echo "<input type='hidden' name='id' value='" . (int)$task['id'] . "'>";
@@ -104,9 +117,11 @@ $notes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <section class="card stickyNotesCard">
             <h1>StickyNotes</h1>
             <div class="container">
+                <h2><u>Deine Notizen</u></h2> 
                 <?php
                     if (empty($notes)) {
                         echo "<div class='emptyList'>
+                              <div class='noteSymbol'>🗒️</div>
                               <h3>Du hast noch keine Notizen!</h3>
                               </div>";
                     } 
